@@ -63,7 +63,7 @@ describe('Work with basic elements', () => {
     //TODO validar opções do combo
   });
 
-  it.only('Combo Múltiplo', () => {
+  it('Combo Múltiplo', () => {
     cy.get('[data-testid=dataEsportes]')
       .select(['natacao', 'Corrida', 'nada'])
     //TODO validar opções selecionadas do Combo Múltiplo
