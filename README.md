@@ -10,7 +10,7 @@ Nesse curso foi possível entender sobre:
 
 - Conceitos básicos do Cypress
 - Mapear elementos no Cypress
-- Fixtures
+- Fixtures do Cypress
 - Assertivas do Cypress
 - Criar custom commands
 - Estruturar um projeto de teste utilizando Cypress
