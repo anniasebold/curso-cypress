@@ -58,6 +58,7 @@ Cypress.Commands.add('getToken', (user, passwd) => {
     } 
   }).its('body.token').should('not.be.empty')
     .then(token => {
+      Cypress.env('token', token)
       return token
     })
 })
@@ -70,4 +71,30 @@ Cypress.Commands.add('resetRest', () => {
       headers: { Authorization: `JWT ${token}` }
     }).its('status').should('be.equal', 200)
   })
+})
+
+Cypress.Commands.add('getContaByName', name => {
+  cy.getToken('anniasebold3.0@gmail.com', 'secret123').then(token => {
+    cy.request({
+      method: 'GET',
+      url: '/contas',
+      headers: {Authorization: `JWT ${token}`},
+      qs: {
+        nome: name
+      }
+    }).then(res => {
+      return res.body[0].id
+    })
+  })
+})
+
+Cypress.Commands.overwrite('request', (originalFn, ...options) => {
+  if(options.length === 1) {
+    options[0].headers = {
+      Authorization: `JWT ${Cypress.env('token')}`
+    }
+  }
+
+  return originalFn(...options)
+
 })
