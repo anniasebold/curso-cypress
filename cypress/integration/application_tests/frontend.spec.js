@@ -4,7 +4,7 @@ import loc from '../../support/locators'
 import '../../support/commandsContas'
 import buildEnv from '../../support/buildEnv'
 
-describe('Should a test at a funcional level', () => {
+describe('Should a test at a frontend level', () => {
 
   after(() => {
     cy.clearLocalStorage()
@@ -16,7 +16,7 @@ describe('Should a test at a funcional level', () => {
   
   beforeEach(() => {
     buildEnv()
-    cy.login('anniasebold3.0@gmail.com', 'secret')
+    cy.login('anniasebold3.0@gmail.com', 'secret', 'Fake User')
     cy.get(loc.MENU.HOME).click()
   });
 
@@ -30,11 +30,16 @@ describe('Should a test at a funcional level', () => {
         "nome": "Conta Fake",
         "visivel": true,
         "usuario_id": 1
+      },
+      onRequest: req => {
+        expect(req.request.body.nome).to.be.not.empty
+        expect(req.request.headers).to.have.property('Authorization')
       }
-    })
+    }).as('saveConta')
 
     cy.acessarMenuConta()
     cy.inserirConta('Conta Fake')
+    // cy.wait('@saveConta').its('request.body.nome').should('not.be.empty')
     cy.get(loc.MESSAGE).should('contain', 'Conta inserida com sucesso!')
   });
 
@@ -134,15 +139,27 @@ describe('Should a test at a funcional level', () => {
     cy.get('.list-group > li').should('have.length', 7)
   });
 
-  it.only('Should get balance', () => {
+  it('Should get balance', () => {
     cy.get(loc.MENU.HOME).click()
     cy.xpath(loc.SALDO.FN_XP_SALDO_CONTA('Carteira'))
       .should('contain', '100,00')
   });
 
   it('Should remove a transaction', () => {
+    cy.route({
+      method: 'GET',
+      url: '/extrato/202106?orderBy=data_pagamento',
+      response: 'fixture:movimentacaoSalva'
+    }).as('extrato') 
+    cy.route({
+      method: 'DELETE',
+      url: '/transacoes/**',
+      response: {},
+      status: 204
+    }).as('del')
+
     cy.get(loc.MENU.EXTRATO).click()
-    cy.xpath(loc.EXTRATO.FN_XP_REMOVE_ELEMENTO('Movimentacao para exclusao')).click()
+    cy.xpath(loc.EXTRATO.FN_XP_REMOVE_ELEMENTO('Movimentacao de conta')).click()
     cy.get(loc.MESSAGE).should('contain', 'removida com sucesso!') 
   });
 

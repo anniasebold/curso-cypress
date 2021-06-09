@@ -3,10 +3,10 @@
 import loc from '../../support/locators'
 import '../../support/commandsContas'
 
-describe('Should a test at a funcional level', () => {
+describe('Should a test at a functional level', () => {
 
   before(() => {
-    cy.login('anniasebold3.0@gmail.com', 'secret123')
+    cy.login('anniasebold3.0@gmail.com', 'secret123', 'Annia Sebold')
     cy.resetApp()
   });
   

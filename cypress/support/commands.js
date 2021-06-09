@@ -33,12 +33,12 @@ Cypress.Commands.add('clickAlert', (locator, message) => {
   })
 })
 
-Cypress.Commands.add('login', (user, passwd) => {
+Cypress.Commands.add('login', (user, passwd, nome) => {
   cy.visit('http://barrigareact.wcaquino.me')
     cy.get(loc.LOGIN.USER).type(user)
     cy.get(loc.LOGIN.PASSWORD).type(passwd)
     cy.get(loc.LOGIN.BTN_LOGIN).click()
-    cy.get(loc.MESSAGE).should('contain', 'Bem vindo, Fake User')
+    cy.get(loc.MESSAGE).should('contain', `Bem vindo, ${nome}`)
     cy.get(loc.BTN_CLOSE_MESSAGE).click()
 })
 

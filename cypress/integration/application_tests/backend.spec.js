@@ -1,6 +1,6 @@
 /// <reference types="cypress" /> 
 
-describe('Should a test at a funcional level', () => {
+describe('Should a test at a backend level', () => {
   
   before(() => {
     cy.getToken('anniasebold3.0@gmail.com', 'secret123')
