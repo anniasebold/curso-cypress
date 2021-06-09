@@ -14,9 +14,9 @@ Nesse curso foi possível entender sobre:
 - Assertivas do Cypress
 - Criar custom commands
 - Estruturar um projeto de teste utilizando Cypress
-- Prática de uma automação funcional de uma aplicação
-- Prática de uma automação de API de uma aplicação
-- Prática de uma automação de UI de uma aplicação
+- Prática de uma automação de testes Funcionais de uma aplicação
+- Prática de uma automação de testes de API de uma aplicação
+- Prática de uma automação de testes de Interface de uma aplicação
 
 
 ## 💾 Como utilizar 
