@@ -38,7 +38,7 @@ Cypress.Commands.add('login', (user, passwd) => {
     cy.get(loc.LOGIN.USER).type(user)
     cy.get(loc.LOGIN.PASSWORD).type(passwd)
     cy.get(loc.LOGIN.BTN_LOGIN).click()
-    cy.get(loc.MESSAGE).should('contain', 'Bem vindo, Annia Sebold')
+    cy.get(loc.MESSAGE).should('contain', 'Bem vindo, Fake User')
     cy.get(loc.BTN_CLOSE_MESSAGE).click()
 })
 
